@@ -27,8 +27,7 @@ export class Tab2Page {
   //   }
   // }
 
-  ngOnInit() {
-    alert('A ver aqui ');
+  ngOnInit() { 
     this.player2 = videojs('my_video_1');
     
     // , this.options, function onPlayerReady() {
