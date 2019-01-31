@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-// import * as Plyr from 'plyr';
+import * as Plyr from 'plyr';
 
 
 
@@ -12,18 +12,18 @@ export class Tab1Page{
   public player;
 
   ngOnInit() {
-        // this.player = new Plyr('#plyrID', { captions: { active: true } });
+        this.player = new Plyr('#plyrID', { captions: { active: true } });
     // this.player = new Plyr(this.videoDivComponent.nativeElement, { captions: { active: true } });
   }
 
-  // pip() {
+  pip() {
 
-  //   this.player.pip = !this.player.pip;
-  // }
+    this.player.pip = !this.player.pip;
+  }
 
-  // airp() {
+  airp() {
 
-  //   this.player.airplay();
-  // }
+    this.player.airplay();
+  }
 
 }

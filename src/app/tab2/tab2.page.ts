@@ -1,6 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-//import * as videojs from 'video.js';
-// import * as videojspip from 'videojs-pip';
 
 declare var videojs: any;
 
@@ -15,60 +13,28 @@ export class Tab2Page {
   public player2;
   options = {};
 
-  // ngOnInit() {
-  //   try {
-  //     // setup the player via the unique element ID
-  //     var element = document.getElementById('videoPlayer');
-  //     if (element == null) {
-  //       throw "error loading blah";
-  //     }
-  //     // if we get here, all good!
-  //     videojs(element, {}, () => { });
-  //     videojs.play();
-  //   }
-  //   catch (e) {
-  //   }
-  // }
-
   ngOnInit() {
-    //alert('A ver aqui ');
-    //this.player2 = videojs('my_video_1');
-    console.log(this.my_video_1)
+/*
+    Actualmente Funciona 
     this.player2 = new videojs(this.my_video_1.nativeElement, {}, () => {
       videojs.log('Your player is ready!');
+    }).ready(function() {
+      var myPlayer = this; // When the player is ready, get a reference to it
+      myPlayer.log('Para el PIP!'); // Initialize the picture-in-picture plugin
+    });;
+    console.log(this.player2);
+*/
 
+    this.player2 = new videojs.getPlayer(this.my_video_1.nativeElement).ready(function() {
+       var myPlayer = this,
+          options = {'scale': 0.5, posX : "left" };
+      myPlayer.pip(options);
     });
-    console.log(this.player2)
 
-    // , this.options, function onPlayerReady() {
-    //   videojs.log('Your player is ready!');
-
-    //   // In this context, `this` is the player that was created by Video.js.
-    //   this.play();
-
-    //   // How about an event listener?
-    //   this.on('ended', function() {
-    //     videojs.log('Awww...over so soon?!');
-    //   });
-    // });
-
-
-    // this.videoJSplayer = videojs('#plyrID', {}, function onPlayerReady() {
-    //   videojs.log('Your player is ready!');
-
-    //   // In this context, `this` is the player that was created by Video.js.
-    //   this.play();
-
-    //   // How about an event listener?
-    //   this.on('ended', function() {
-    //     videojs.log('Awww...over so soon?!');
-    //   });
-    // });
   }
 
 
-  pip() {
-
+  pip() { 
     this.player2.play();
   }
 }
