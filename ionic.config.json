@@ -1,5 +1,7 @@
 {
   "name": "bin",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

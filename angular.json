@@ -32,6 +32,8 @@
               }
             ],
             "styles": [
+              "node_modules/plyr/dist/plyr.css",
+
               {
                 "input": "src/theme/variables.scss"
               },
