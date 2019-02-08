@@ -1,0 +1,7 @@
+
+<div id="move" [ngClass]="vurl == '' ? 'moveup' : 'evendown'">
+   <div id="vdflot" *ngIf="vurl != ''" style="width: 300px !important">
+      <video id="plyrID" style="width: 300px !important" class="vdflot" *ngIf="vurl != ''" [src]="vurl" controls data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": ["play-large", "play", "progress", "current-time", "mute", "volume"] }'></video>
+   </div>
+   <ion-button  *ngIf="vurl != ''" full (click)="salir()" >Salir Pip</ion-button>
+</div>

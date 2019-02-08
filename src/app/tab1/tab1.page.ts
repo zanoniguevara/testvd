@@ -13,7 +13,10 @@ export class Tab1Page {
   videocontenedor:any;
   player: any;
   opciones: any;
-
+ 
+  constructor() {
+    
+  }
   ngOnInit() {
     this.player = new Plyr('#plyrID', { captions: { active: true } });
     this.videocontenedor = document.getElementById('move');
@@ -31,6 +34,6 @@ export class Tab1Page {
   pipno() {
     // console.log(this.conten.get.x());
     this.conten.destroy();
-    this.videocontenedor.style.position = "initial";
+    this.videocontenedor.style.position = "unset";
   }
 }

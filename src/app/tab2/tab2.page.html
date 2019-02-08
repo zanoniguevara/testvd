@@ -1,9 +1,36 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      Tab Two <ion-button *ngIf="swpip" left large (click)="nopip()">Salir Pip</ion-button>
     </ion-title>
+    
   </ion-toolbar>
 </ion-header>
-
-<ion-content></ion-content>
+<div>
+  <video id="vppalP" [src]="vppalP" *ngIf="vppalP != ''" class="videocard" controls data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": ["play-large", "play", "progress", "current-time", "mute", "volume"] }'>
+  </video>
+  <ion-button *ngIf="vppalP != ''" (click)="onPpalOut()">
+    Salir Ppal
+  </ion-button>
+</div>
+<ion-content>
+  <ion-list>
+    <h1>{{jsonvideo.name}}</h1>
+    <ion-item *ngFor="let item of jsonvideo.videos ">
+      <ion-card>
+        <ion-card-header>
+          {{ item.url }}
+        </ion-card-header>
+        <ion-card-content>
+          <video [id]='"vd_" + item.id' class="videocard" controls data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": ["play-large", "play", "progress", "current-time", "mute", "volume"] }'>
+            <source [src]="item.url" [type]="item.type">
+          </video>
+          <ion-button large (click)="pip('vd_'+item.id)">PIP</ion-button>
+          <ion-button large (click)="ppl('vd_'+item.id, item.url)">Principal</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+  </ion-list>
+</ion-content>
