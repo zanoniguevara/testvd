@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two <ion-button *ngIf="swpip" left large (click)="nopip()">Salir Pip</ion-button>
+      Home <ion-button *ngIf="swpip" (click)="nopip()">Salir Pip</ion-button>
     </ion-title>
     
   </ion-toolbar>
@@ -19,10 +19,10 @@
     <ion-item *ngFor="let item of jsonvideo.videos ">
       <ion-card>
         <ion-card-header>
-          {{ item.url }}
+          {{ item.id }}
         </ion-card-header>
         <ion-card-content>
-          <video [id]='"vd_" + item.id' class="videocard" controls data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": ["play-large", "play", "progress", "current-time", "mute", "volume"] }'>
+          <video [id]='"vd_" + item.id' class="videocard" [poster]="item.poster" controls data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": ["play-large", "play", "progress", "current-time", "mute", "volume"] }'>
             <source [src]="item.url" [type]="item.type">
           </video>
           <ion-button large (click)="pip('vd_'+item.id)">PIP</ion-button>

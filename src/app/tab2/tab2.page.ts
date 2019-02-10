@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import * as Plyr from 'plyr';
 import { Events } from '@ionic/angular';
 
@@ -26,14 +26,14 @@ export class Tab2Page {
         'url': 'https://vjs.zencdn.net/v/oceans.mp4',
         'type': 'video/mp4',
         'videos': [
-          { 'id': 'vd01', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4' },
-          { 'id': 'vd02', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4' },
-          { 'id': 'vd03', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4' },
-          { 'id': 'vd04', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4' },
-          { 'id': 'vd05', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4' },
-          { 'id': 'vd06', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4' },
-          { 'id': 'vd07', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4' },
-          { 'id': 'vd08', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4' }
+          { 'id': 'vd01', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4' , 'poster' : 'http://video-js.zencoder.com/oceans-clip.jpg' },
+          { 'id': 'vd02', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4' , 'poster' : 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg'},
+          { 'id': 'vd03', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4' , 'poster' : 'http://video-js.zencoder.com/oceans-clip.jpg'},
+          { 'id': 'vd04', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4' , 'poster' : 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg'},
+          { 'id': 'vd05', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4' , 'poster' : 'http://video-js.zencoder.com/oceans-clip.jpg'},
+          { 'id': 'vd06', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4', 'poster' : 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
+          { 'id': 'vd07', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4' , 'poster' : 'http://video-js.zencoder.com/oceans-clip.jpg'},
+          { 'id': 'vd08', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4', 'poster' : 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' }
         ]
       }
   }
@@ -70,7 +70,7 @@ export class Tab2Page {
 
   pip(idvideo: string) {
     let tmp = new Plyr('#' + idvideo);
-    this.events.publish('sp_pipmode-up', tmp.media.currentSrc);
+    this.events.publish('sp_pipmode-up', tmp.media.currentSrc, tmp);
     this.swpip = true;
   }
 
@@ -87,5 +87,4 @@ export class Tab2Page {
   onPpalOut(){
     this.vppalP = ""; 
   }
-
 }
