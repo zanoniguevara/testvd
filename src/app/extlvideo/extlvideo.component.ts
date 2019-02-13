@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Events } from '@ionic/angular';
+import {CdkDragEnd, CdkDragStart, CdkDragMove, DragDropModule} from '@angular/cdk/drag-drop';
+
 import * as Plyr from 'plyr';
-import * as Draggable from 'draggable';
 
 @Component({
   selector: 'app-extlvideo',
@@ -11,11 +12,13 @@ import * as Draggable from 'draggable';
 export class ExtlvideoComponent implements OnInit {
   player: Plyr;
   playeraux: Plyr;
-  videocontenedor: HTMLElement;
-  opciones: { setCursor: boolean; };
-  conten: any;
   vurl: string = "";
   sw: boolean; 
+  movx : number = 0;
+  movy : number = 0;
+
+  state = '';
+  position = '';
 
   constructor(public events: Events) {
     this.sw = false;
@@ -24,11 +27,6 @@ export class ExtlvideoComponent implements OnInit {
       this.vurl = url;
       plyr.id = "plyrID";
       this.playeraux = plyr;
-      // this.player = new Plyr('#plyrID', { captions: { active: true } });
-      // this.player.on('ready', event => {
-        // event.detail.plyr.play();
-      // });
-      // this.player.play();
     });
 
     events.subscribe('sp_pipmode-up2', () => {
@@ -40,6 +38,8 @@ export class ExtlvideoComponent implements OnInit {
         this.player.on('ready', event => {
           event.detail.plyr.play();
         });
+        console.log(this.playeraux.media.currentTime);
+        this.player.media.currentTime = this.playeraux.media.currentTime;
         this.player.play();  
       }
     });
@@ -51,10 +51,7 @@ export class ExtlvideoComponent implements OnInit {
   }
     
 
-  ngOnInit() {
-    this.opciones = { setCursor: false };
-    this.videocontenedor = document.getElementById('move');
-    this.conten = new Draggable(this.videocontenedor, this.opciones);
+  ngOnInit() { 
     this.player = new Plyr('#plyrID', { captions: { active: true } });
   }
 
@@ -65,4 +62,33 @@ export class ExtlvideoComponent implements OnInit {
       this.sw = false;
     }
   }
+
+  onDragFactory(){
+    return function (element, x, y) {
+      this.movx = x;
+      this.movy = y;
+  }
+  }
+
+  dragStarted(event: CdkDragStart) {
+    this.state = 'dragStarted';
+  }
+ 
+  dragEnded(event: CdkDragEnd) {
+    this.state = 'dragEnded';
+    
+    if (this.movx <= 20 )
+    {
+      this.events.publish('sp_pipmode-down');
+      const source: any = event.source
+      source._passiveTransform = { x: 50, y: 50 };
+    }
+  }
+ 
+  dragMoved(event: CdkDragMove, state) {
+    this.position = `> Position X: ${event.pointerPosition.x} - Y: ${event.pointerPosition.y}`;
+    this.movx =  event.pointerPosition.x;
+    this.movy = event.pointerPosition.y;
+    
+  } 
 }

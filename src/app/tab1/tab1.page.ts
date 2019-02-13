@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as Plyr from 'plyr';
-import * as Draggable from 'draggable';
+// import * as Draggable from 'draggable';
 
 
 @Component({
@@ -9,7 +9,7 @@ import * as Draggable from 'draggable';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  conten: Draggable;
+  // conten: Draggable;
   videocontenedor:any;
   player: any;
   opciones: any;
@@ -29,11 +29,11 @@ export class Tab1Page {
       };
   }
   pip() {
-    this.conten = new Draggable(this.videocontenedor, this.opciones);
+    // this.conten = new Draggable(this.videocontenedor, this.opciones);
   }
   pipno() {
     // console.log(this.conten.get.x());
-    this.conten.destroy();
+    // this.conten.destroy();
     this.videocontenedor.style.position = "unset";
   }
 }

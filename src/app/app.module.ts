@@ -9,11 +9,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExtlvideoComponent } from './extlvideo/extlvideo.component';
+import {DemoMaterialModule} from '../material-module';
 
 @NgModule({
   declarations: [AppComponent, ExtlvideoComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    DemoMaterialModule],
   providers: [
     StatusBar,
     SplashScreen,

@@ -1,17 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Home <ion-button *ngIf="swpip" (click)="nopip()">Salir Pip</ion-button>
+      Home  
     </ion-title>
     
   </ion-toolbar>
 </ion-header>
 <div>
-  <video id="vppalP" [src]="vppalP" *ngIf="vppalP != ''" class="videocard" controls data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": ["play-large", "play", "progress", "current-time", "mute", "volume"] }'>
+  <ion-slides #ppalslider pager="false" (ionSlideDidChange)="onSlideChanged($event)">
+    <ion-slide>
+      <video id="vppalP" [src]="vppalP" *ngIf="vppalP != ''" class="videocard" controls data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": ["play-large", "play", "progress", "current-time", "mute", "volume"] }'>
   </video>
-  <ion-button *ngIf="vppalP != ''" (click)="onPpalOut()">
-    Salir Ppal
-  </ion-button>
+    </ion-slide>
+    <ion-slide>
+    </ion-slide>
+  </ion-slides>
 </div>
 <ion-content>
   <ion-list>

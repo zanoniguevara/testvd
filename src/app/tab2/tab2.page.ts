@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import * as Plyr from 'plyr';
-import { Events } from '@ionic/angular';
+import { Events, IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -8,14 +8,15 @@ import { Events } from '@ionic/angular';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  @ViewChild('ppalslider') slider : IonSlides;
+
   jsonvideo;
   players = [];
   videocontenedor: any;
   player: any;
   opciones: any;
   onPlay: string;
-  vppalP: string;
-  swpip : boolean = false;
+  vppalP: string; 
 
   constructor(public events: Events) {
     this.vppalP = "";
@@ -59,8 +60,10 @@ export class Tab2Page {
         console.log(this.onPlay + " alla aqui " + p.id);
 
         if (this.onPlay != "" && this.onPlay != p.id) {
-          let y: any;
-          y = document.getElementById(this.onPlay);
+          let tmpplay = new Plyr('#' + this.onPlay);
+          let tmpstop = new Plyr('#' + p.id);
+          console.log(tmpplay);
+          console.log(tmpstop);
           console.log("Parate");
         }
         this.onPlay = p.id;
@@ -70,21 +73,21 @@ export class Tab2Page {
 
   pip(idvideo: string) {
     let tmp = new Plyr('#' + idvideo);
+    tmp.stop();
+    console.log(tmp);
     this.events.publish('sp_pipmode-up', tmp.media.currentSrc, tmp);
-    this.swpip = true;
   }
 
   ppl(id: string, url: string) {
     this.vppalP = url;
-    // this.players[id].play();
   }
 
-  nopip(){
-    this.events.publish('sp_pipmode-down');
-    this.swpip = false;
-  }
-  
   onPpalOut(){
     this.vppalP = ""; 
+  }
+
+  onSlideChanged(event){ 
+    this.slider.slideTo(0);
+    this.onPpalOut();
   }
 }
