@@ -31,9 +31,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": [
-              "node_modules/plyr/dist/plyr.css",
-
+            "styles": [ 
               {
                 "input": "src/theme/variables.scss"
               },

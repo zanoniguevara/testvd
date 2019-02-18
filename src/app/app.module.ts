@@ -11,13 +11,22 @@ import { AppComponent } from './app.component';
 import { ExtlvideoComponent } from './extlvideo/extlvideo.component';
 import {DemoMaterialModule} from '../material-module';
 
+import { VgCoreModule } from 'videogular2/core';
+import { VgControlsModule } from 'videogular2/controls';
+import { VgOverlayPlayModule } from 'videogular2/overlay-play';
+import { VgBufferingModule } from 'videogular2/buffering';
+
 @NgModule({
   declarations: [AppComponent, ExtlvideoComponent],
   entryComponents: [],
   imports: [BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule, 
-    DemoMaterialModule],
+    DemoMaterialModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule],
   providers: [
     StatusBar,
     SplashScreen,
