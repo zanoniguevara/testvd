@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 // import * as Plyr from 'plyr';
-import { Events, IonSlides } from '@ionic/angular';
+import { Events } from '@ionic/angular';
 import { VgAPI } from 'videogular2/core';
 
 @Component({
@@ -9,7 +9,6 @@ import { VgAPI } from 'videogular2/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  @ViewChild('ppalslider') slider : IonSlides;
 
   jsonvideo;
   players = [];
@@ -17,7 +16,7 @@ export class Tab2Page {
   player: any;
   opciones: any;
   onPlay: string;
-  vppalP: string; 
+  // vppalP: string; 
 
   arrVgApi:VgAPI[] = [];
   api: VgAPI;
@@ -27,7 +26,6 @@ export class Tab2Page {
 
 
   constructor(public events: Events) {
-    this.vppalP = "";
     this.onPlay = "";
     this.jsonvideo =
       {
@@ -47,18 +45,9 @@ export class Tab2Page {
       }
   }
 
-  ngOnInit() {
-    // this.player = new Plyr('#vppalP');
-    // this.player.on('play', event => {
-    //   const instance = event.detail.plyr;
-    //   console.log(event);
-    // });
+  ngOnInit() {}
 
-  }
-
-  ngAfterViewInit() {
-    // this.aver();
-  }
+  ngAfterViewInit() {}
 
   onPlayerReady(api: VgAPI) {
     this.api = api;
@@ -72,59 +61,25 @@ export class Tab2Page {
         this.auxapi.pause();
       }
       this.auxapi = api;
-    });
-
-    this.api.getDefaultMedia().subscriptions.ended.subscribe(
-      () => {
-        // Set the video to the beginning
-        // this.api.getDefaultMedia().currentTime = 300;
-      }
-    );
+    }); 
   }
-
-  // aver() {
-  //   this.players = Array.from(document.querySelectorAll('.videocard')).map(p => {
-  //     let v = new Plyr(p);
-  //     v.on('play', event => {
-  //       console.log("Playyy!!!");
-  //       console.log(this.onPlay + " alla aqui " + p.id);
-  //       if (this.onPlay != "" && this.onPlay != p.id) {
-  //         // this.players[p.id].pause();
-  //         // let tmpplay = new Plyr('#' + this.onPlay);
-  //         // let tmpstop = new Plyr('#' + p.id);
-  //         // tmpstop.media.stop = true;
-  //         console.log("Parate");
-  //         console.log(this.players[p.id].media.currentTime);
-  //       }
-  //       this.onPlay = p.id;
-  //     });
-  //     v.on('stop', event => {
-  //       console.log("Stop!!!");
-  //     });
-  //   });
-  // }
 
   pip(idvideo: string, idsrc:string) {
     this.apiext = this.arrVgApi.find(item => item.getDefaultMedia().id.toString()===idvideo);
-
-    // let tmp = new Plyr('#' + idvideo);
-    // tmp.stop();
-    console.log(idvideo);
     this.events.publish('sp_pipmode-up', this.apiext, document.getElementById(idsrc).getAttribute("src"));
     this.apiext.pause();
-
   }
 
-  ppl(id: string, url: string) {
-    this.vppalP = url;
+  ppl(idvideo: string, idsrc:string) {
+    console.log("aqui");
+    this.apiext = this.arrVgApi.find(item => item.getDefaultMedia().id.toString()===idvideo);
+    this.events.publish('sp_pplmode-up', this.apiext, document.getElementById(idsrc).getAttribute("src"));
+    this.apiext.pause();
   }
-
-  onPpalOut(){
-    this.vppalP = ""; 
-  }
-
-  onSlideChanged(event){ 
-    this.slider.slideTo(0);
-    this.onPpalOut();
+  
+  masvideos(){
+          
+          this.jsonvideo.videos.push({ 'id': 'vd09', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' });
+          console.log(this.jsonvideo);
   }
 }

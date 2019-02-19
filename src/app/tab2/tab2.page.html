@@ -1,68 +1,52 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Home  
+      Home
     </ion-title>
-    
+    <app-ppalvideo></app-ppalvideo>
   </ion-toolbar>
 </ion-header>
-<div>
-  <ion-slides #ppalslider pager="false" (ionSlideDidChange)="onSlideChanged($event)">
-    <ion-slide>
-      <!-- <video id="vppalP" [src]="vppalP" *ngIf="vppalP != ''" class="videocard" controls data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": ["play-large", "play", "progress", "current-time", "mute", "volume"] }'>
-  </video> -->
-    </ion-slide>
-    <ion-slide>
-    </ion-slide>
-  </ion-slides>
-</div>
 <ion-content>
   <ion-list>
     <h1>{{jsonvideo.name}}</h1>
     <ion-item *ngFor="let item of jsonvideo.videos ">
-        <ion-card>
-            <ion-card-header>
-              {{ item.id }}
-            </ion-card-header>
-            <ion-card-content>
-              <vg-player  [id]='"vgm" + item.id'  (onPlayerReady)="onPlayerReady($event)">
-                <vg-overlay-play></vg-overlay-play>
-                <vg-buffering></vg-buffering>
-                 <!-- <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+      <ion-card>
+        <ion-card-header>
+          {{ item.id }}
+        </ion-card-header>
+        <ion-card-content>
+          <vg-player [id]='"vgm" + item.id' (onPlayerReady)="onPlayerReady($event)">
+            <vg-overlay-play></vg-overlay-play>
+            <vg-buffering></vg-buffering>
+            <!-- <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
                       <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time> -->
-                <vg-controls style="width: 0px;">
-                    <!-- <vg-play-pause></vg-play-pause> -->
-                    <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
-                    <vg-scrub-bar>
-                     
-                  </vg-scrub-bar>
-                    <!-- <vg-playback-button></vg-playback-button> -->
-                    
-                    <!-- <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar> -->
-                    <!-- <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display> -->
-                    <!-- <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display> -->
-                    <!-- <vg-track-selector></vg-track-selector> -->
-                    <vg-mute></vg-mute>
-                    <!-- <vg-volume></vg-volume> -->
-                    <vg-fullscreen ></vg-fullscreen>
-                    <ion-button (click)="pip('vd_'+item.id, 'src'+item.id)"><ion-icon  name="open"></ion-icon></ion-button>
-                    <ion-button (click)="ppl('vd_'+item.id, item.url)"><ion-icon name="square-outline"></ion-icon></ion-button>
-                </vg-controls>
-                <video [vgMedia]="media"  #media  [id]='"vd_" + item.id' [poster]="item.poster" preload="auto" >
-                    <source [id]='"src" + item.id' [src]="item.url" [type]="item.type">
-                </video>
-            </vg-player>
-                      <!-- <button ion-button onclick="alert('')">PIP</button>
+            <vg-controls style="width: 0px;">
+              <!-- <vg-play-pause></vg-play-pause> -->
+              <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+              <vg-scrub-bar> </vg-scrub-bar>
+              <!-- <vg-playback-button></vg-playback-button> -->
+              <!-- <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar> -->
+              <!-- <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display> -->
+              <!-- <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display> -->
+              <!-- <vg-track-selector></vg-track-selector> -->
+              <vg-mute></vg-mute>
+              <!-- <vg-volume></vg-volume> -->
+              <vg-fullscreen></vg-fullscreen>
+              <ion-button (click)="pip('vd_'+item.id, 'src'+item.id)">
+                <ion-icon name="open"></ion-icon>
+              </ion-button>
+              <ion-button (click)="ppl('vd_'+item.id, 'src'+item.id)">
+                <ion-icon name="square-outline"></ion-icon>
+              </ion-button>
+            </vg-controls>
+            <video [vgMedia]="media" #media [id]='"vd_" + item.id' [poster]="item.poster" preload="auto">
+              <source [id]='"src" + item.id' [src]="item.url" [type]="item.type">
+            </video>
+          </vg-player>
+          <!-- <button ion-button onclick="alert('')">PIP</button>
                       <button ion-button onclick="alert()">Principal</button> -->
-                      <!--  -->
-                  
-
-
-
-
-
-
-      <!-- <ion-card>
+          <!--  -->
+          <!-- <ion-card>
         <ion-card-header>
           {{ item.id }}
         </ion-card-header>
@@ -73,8 +57,9 @@
           <ion-button large (click)="pip('vd_'+item.id)">PIP</ion-button>
           <ion-button large (click)="ppl('vd_'+item.id, item.url)">Principal</ion-button>-->
         </ion-card-content>
-      </ion-card> 
+      </ion-card>
     </ion-item>
+    <button ion-button (click)="masvideos()">Mas videos</button>
   </ion-list>
   <ion-list>
   </ion-list>

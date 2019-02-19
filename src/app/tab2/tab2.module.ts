@@ -10,17 +10,21 @@ import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 
+import { PpalvideoComponent } from '../ppalvideo/ppalvideo.component';
+
 @NgModule({
-  imports: [
+  imports: [ 
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: Tab2Page }]),
+    RouterModule.forChild([{ path: '', component: Tab2Page }, { path: 'ppalvideo', component: PpalvideoComponent }]),
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule
-  ],
-  declarations: [Tab2Page]
+  ], 
+  exports: [PpalvideoComponent],
+
+  declarations: [Tab2Page, PpalvideoComponent]
 })
 export class Tab2PageModule {}

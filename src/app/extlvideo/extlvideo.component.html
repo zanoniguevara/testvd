@@ -1,26 +1,10 @@
-<!-- 
-<div id="move" [ngClass]="vurl == '' ? 'moveup' : 'evendown'" (click)="myClickHandler()">
-   <div id="vdflot" *ngIf="vurl != ''" style="width: 200px !important">
-        <video id="plyrID" style="width: 200px !important" class="vdflot" *ngIf="vurl != ''" [src]="vurl" controls data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": [] }'></video>  
-   </div>
-</div>
- 
- -->
- <!-- onclick="alert()" -->
-<div style="z-index: 500000; position: relative; width: 200px" *ngIf="vurl != ''" cdkDrag 
-   (cdkDragStarted)="dragStarted($event)" (cdkDragEnded)="dragEnded($event)" (cdkDragMoved)="dragMoved($event, state)">
- 
+<!-- onclick="alert()" -->
+<div style="z-index: 500000; position: relative; width: 200px" *ngIf="vurl != ''" cdkDrag (cdkDragStarted)="dragStarted($event)"
+   (cdkDragEnded)="dragEnded($event)" (cdkDragMoved)="dragMoved($event, state)">
    <vg-player *ngIf="vurl != ''" (onPlayerReady)="onPlayerReady($event)">
-      
-      <video [vgMedia]="media"  #media id="plyrID"  preload="auto" >
-          <source [src]="vurl" > 
-             [type]="item.type"  
+      <video [vgMedia]="media" #media id="plyrID" preload="auto">
+         <source [src]="vurl">
+         [type]="item.type"
       </video>
-  </vg-player>  
-
-  
-  
-   <!-- <video id="plyrID" style="width: 200px !important" class="vdflot" *ngIf="vurl != ''" 
-      data-plyr-config='{ "title": "This is an example video", "volume": 1, "controls": [] }'></video> -->
-   <!-- <span *ngIf="validar(vurl)"></span> -->
+   </vg-player>
 </div>
