@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Events } from '@ionic/angular';
 import { CdkDragEnd, CdkDragStart, CdkDragMove, DragDropModule } from '@angular/cdk/drag-drop';
-
+import { ResizeEvent } from 'angular-resizable-element';
 import { VgAPI } from 'videogular2/core';
+
 @Component({
   selector: 'app-extlvideo',
   templateUrl: './extlvideo.component.html',
@@ -12,14 +13,19 @@ import { VgAPI } from 'videogular2/core';
 export class ExtlvideoComponent implements OnInit {
   vurl: string = "";
   sw: boolean;
+  vctp: boolean;
   movx: number = 0;
   movy: number = 0;
   api: VgAPI;
   ctm: number = 0;
   state = '';
+  estilo:any;
 
   constructor(public events: Events) {
     this.sw = false;
+    this.vctp = false;
+    this.estilo = {width: "200px", height: "auto" }
+
     events.subscribe('sp_pipmode-up', (pipApi: VgAPI, url: string) => {
       if (url != this.vurl && this.vurl != "") {
         this.api.pause();
@@ -42,25 +48,27 @@ export class ExtlvideoComponent implements OnInit {
     });
   }
 
-  onPlayerReady(api: VgAPI) {
+  onPlayerReadyPip(api: VgAPI) {
     this.api = api;
     this.api.getDefaultMedia().currentTime = this.ctm;
     this.api.play();
 
-    this.api.getDefaultMedia().subscriptions.ended.subscribe(() => { this.events.publish('sp_pipmode-down'); });
-    
-    this.api.getDefaultMedia().subscriptions.pause.subscribe(() => { 
-        if (this.sw) {
-          let a = this.ctm;
-          let b = this.vurl;
-          this.events.publish('sp_pipmode-down');
-          this.esperarVideo(a, b, this.movx, this.movy);
-          this.sw = false;
-        }
-      });
+    this.api.getDefaultMedia().subscriptions.ended.subscribe(() => {this.events.publish('sp_pipmode-down'); });
+
+    this.api.getDefaultMedia().subscriptions.pause.subscribe(() => {
+      if (this.sw) {
+        let a = this.ctm;
+        let b = this.vurl;
+        this.events.publish('sp_pipmode-down');
+        this.esperarVideo(a, b, this.movx, this.movy);
+        this.sw = false;
+      }
+    });
+
+    this.api.fsAPI.onChangeFullscreen.subscribe((event) => { this.toggleFullscreenPip(event); });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onDragFactory() {
     return function (element, x, y) {
@@ -74,8 +82,8 @@ export class ExtlvideoComponent implements OnInit {
   }
 
   dragEnded(event: CdkDragEnd) {
-    this.state = 'dragEnded';
-    if (this.movx <= 20) {
+    this.state = 'dragEnded'; 
+    if (this.movx <= 20) { 
       this.events.publish('sp_pipmode-down');
       const source: any = event.source
       source._passiveTransform = { x: 50, y: 50 };
@@ -87,12 +95,20 @@ export class ExtlvideoComponent implements OnInit {
     this.movy = event.pointerPosition.y;
   }
 
-
   esperarVideo(a, b, x, y): Promise<any> {
     return new Promise<any>(
       (resolve) => {
         setTimeout(resolve, 5)
       }
     ).then(() => { this.events.publish('sp_pipmode-up2', a, b, x, y); });
+  }
+
+  toggleFullscreenPip($event) {
+    this.vctp = $event;
+  }
+
+  onResizeEnd(event: ResizeEvent): void {
+    console.log('Element was resized', event);
+    this.estilo.width = event.rectangle.width.toString() + "px";
   }
 }

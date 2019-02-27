@@ -17,14 +17,12 @@ import { PpalvideoComponent } from '../ppalvideo/ppalvideo.component';
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: Tab2Page }, { path: 'ppalvideo', component: PpalvideoComponent }]),
+    RouterModule.forChild([{ path: '', component: Tab2Page }]),
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule
   ], 
-  exports: [PpalvideoComponent],
-
   declarations: [Tab2Page, PpalvideoComponent]
 })
 export class Tab2PageModule {}

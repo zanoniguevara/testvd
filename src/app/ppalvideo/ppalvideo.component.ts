@@ -9,26 +9,31 @@ import { VgAPI } from 'videogular2/core';
 })
 export class PpalvideoComponent implements OnInit {
   @ViewChild('ppalslider') slider : IonSlides;
-  // vppalP: string;
   apiPpal:VgAPI; 
   srcurl:string;
-  // srctyp:string;
-  // srcptr:string;
   srcctm:number; 
+  swppal: boolean; 
 
   constructor(public events: Events) {
     this.srcurl = "";
     this.srcctm = 0;
+    this.swppal = false;
 
-    events.subscribe('sp_pplmode-up', (pipApi: VgAPI, url: string) => {
-      console.log(pipApi);
+    events.subscribe('sp_pplmode-up', (pplApi: VgAPI, url: string) => {
+      console.log(pplApi);
       console.log(url);
       if (url != this.srcurl && this.srcurl != "") {
         this.apiPpal.pause();
         this.srcurl = ""; 
+        this.swppal = true;
       }
       this.srcurl = url;
-      this.srcctm = pipApi.getDefaultMedia().currentTime;
+      this.srcctm = pplApi.getDefaultMedia().currentTime;
+    });
+
+    events.subscribe('sp_pplmode-up2', (ctm, url) => {
+      this.srcurl = url;
+      this.srcctm = ctm; 
     });
 
     events.subscribe('sp_pplmode-down', () => {
@@ -44,15 +49,15 @@ export class PpalvideoComponent implements OnInit {
 
     this.apiPpal.getDefaultMedia().subscriptions.ended.subscribe(() => { this.events.publish('sp_pplmode-down'); });
 
-    // this.api.getDefaultMedia().subscriptions.pause.subscribe(() => { 
-    //     if (this.sw) {
-    //       let a = this.ctm;
-    //       let b = this.vurl;
-    //       this.events.publish('sp_pipmode-down');
-    //       this.esperarVideo(a, b, this.movx, this.movy);
-    //       this.sw = false;
-    //     }
-    //   });
+    this.apiPpal.getDefaultMedia().subscriptions.pause.subscribe(() => { 
+      if (this.swppal) {
+        let a = this.srcctm;
+        let b = this.srcurl;
+        this.events.publish('sp_pplmode-down');
+        this.esperarVideo(a, b);
+        this.swppal = false;
+      }
+    });
   }
 
   ngOnInit() {
@@ -71,5 +76,11 @@ export class PpalvideoComponent implements OnInit {
     this.onPpalOut();
   }
 
-
+  esperarVideo(a, b): Promise<any> {
+    return new Promise<any>(
+      (resolve) => {
+        setTimeout(resolve, 5)
+      }
+    ).then(() => { this.events.publish('sp_pplmode-up2', a, b); });
+  }
 }

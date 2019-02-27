@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-// import * as Plyr from 'plyr';
+import { Component } from '@angular/core'; 
 import { Events } from '@ionic/angular';
 import { VgAPI } from 'videogular2/core';
 
@@ -22,10 +21,11 @@ export class Tab2Page {
   api: VgAPI;
   auxapi: VgAPI;
   apiext: VgAPI;
-
+  vgctrl: boolean;
 
 
   constructor(public events: Events) {
+    this.vgctrl = false;
     this.onPlay = "";
     this.jsonvideo =
       {
@@ -61,7 +61,10 @@ export class Tab2Page {
         this.auxapi.pause();
       }
       this.auxapi = api;
-    }); 
+    });  
+    this.api.fsAPI.onChangeFullscreen.subscribe((event) => {
+      this.toggleFullscreen(event);
+    });
   }
 
   pip(idvideo: string, idsrc:string) {
@@ -81,5 +84,9 @@ export class Tab2Page {
           
           this.jsonvideo.videos.push({ 'id': 'vd09', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' });
           console.log(this.jsonvideo);
+  }
+
+  toggleFullscreen($event){
+    this.vgctrl = $event;
   }
 }

@@ -1,10 +1,26 @@
-<!-- onclick="alert()" -->
-<div style="z-index: 500000; position: relative; width: 200px" *ngIf="vurl != ''" cdkDrag (cdkDragStarted)="dragStarted($event)"
-   (cdkDragEnded)="dragEnded($event)" (cdkDragMoved)="dragMoved($event, state)">
-   <vg-player *ngIf="vurl != ''" (onPlayerReady)="onPlayerReady($event)">
+<div style="z-index: 500000; position: relative; " [ngStyle]="estilo" *ngIf="vurl != ''" cdkDrag (cdkDragStarted)="dragStarted($event)"
+   (cdkDragEnded)="dragEnded($event)" (cdkDragMoved)="dragMoved($event, state)" mwlResizable [enableGhostResize]="true"
+   [resizeEdges]="{bottom: true, right: true, top: true, left: true}" (resizeEnd)="onResizeEnd($event)">
+   <vg-player *ngIf="vurl != ''" (onPlayerReady)="onPlayerReadyPip($event)">
+      <vg-scrub-bar *ngIf="vctp">
+         <vg-scrub-bar-current-time *ngIf="vctp"></vg-scrub-bar-current-time>
+         <vg-scrub-bar-buffering-time *ngIf="vctp"></vg-scrub-bar-buffering-time>
+      </vg-scrub-bar>
+      <vg-controls style="background-color: transparent" *ngIf="vctp">
+         <vg-play-pause *ngIf="vctp"></vg-play-pause>
+         <vg-mute *ngIf="vctp"></vg-mute>
+         <vg-time-display *ngIf="vctp" vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+         <vg-scrub-bar *ngIf="vctp"> </vg-scrub-bar>
+         <vg-fullscreen></vg-fullscreen>
+      </vg-controls>
       <video [vgMedia]="media" #media id="plyrID" preload="auto">
          <source [src]="vurl">
-         [type]="item.type"
       </video>
    </vg-player>
+   <div class="example-handle" cdkDragHandle>
+      <svg width="20px" fill="currentColor" viewBox="0 0 24 24">
+         <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+         <path d="M0 0h24v24H0z" fill="none"></path>
+      </svg>
+   </div>
 </div>

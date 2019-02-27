@@ -8,10 +8,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ExtlvideoComponent } from './extlvideo/extlvideo.component';
-import { PpalvideoComponent } from './ppalvideo/ppalvideo.component';
+import { ExtlvideoComponent } from './extlvideo/extlvideo.component'; 
 
-import {DemoMaterialModule} from '../material-module';
+import { DragDropModule } from '@angular/cdk/drag-drop'; 
+import { ResizableModule } from 'angular-resizable-element'; 
 
 import { VgCoreModule } from 'videogular2/core';
 import { VgControlsModule } from 'videogular2/controls';
@@ -19,12 +19,13 @@ import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 
 @NgModule({
-  declarations: [AppComponent, ExtlvideoComponent, PpalvideoComponent],
+  declarations: [AppComponent, ExtlvideoComponent],
   entryComponents: [],
   imports: [BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule, 
-    DemoMaterialModule,
+    DragDropModule,
+    ResizableModule,
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
