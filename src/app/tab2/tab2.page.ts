@@ -35,10 +35,10 @@ export class Tab2Page {
         'videos': [
           { 'id': 'vd01', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
           { 'id': 'vd02', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
-          { 'id': 'vd03', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
+          { 'id': 'vd03', 'url': 'http://static.videogular.com/assets/videos/videogular.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
           { 'id': 'vd04', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
           { 'id': 'vd05', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
-          { 'id': 'vd06', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
+          { 'id': 'vd06', 'url': 'http://static.videogular.com/assets/videos/videogular.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
           { 'id': 'vd07', 'url': 'https://vjs.zencdn.net/v/oceans.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' },
           { 'id': 'vd08', 'url': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4', 'type': 'video/mp4', 'poster': 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg' }
         ]

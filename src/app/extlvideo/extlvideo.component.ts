@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Events } from '@ionic/angular';
-import { CdkDragEnd, CdkDragStart, CdkDragMove, DragDropModule } from '@angular/cdk/drag-drop';
-import { ResizeEvent } from 'angular-resizable-element';
+import { Events } from '@ionic/angular'; 
 import { VgAPI } from 'videogular2/core';
 
 @Component({
@@ -13,9 +11,7 @@ import { VgAPI } from 'videogular2/core';
 export class ExtlvideoComponent implements OnInit {
   vurl: string = "";
   sw: boolean;
-  vctp: boolean;
-  movx: number = 0;
-  movy: number = 0;
+  vctp: boolean; 
   api: VgAPI;
   ctm: number = 0;
   state = '';
@@ -38,9 +34,7 @@ export class ExtlvideoComponent implements OnInit {
 
     events.subscribe('sp_pipmode-up2', (ctm, url, x, y) => {
       this.vurl = url;
-      this.ctm = ctm;
-      this.movx = x;
-      this.movy = y;
+      this.ctm = ctm; 
     });
 
     events.subscribe('sp_pipmode-down', () => {
@@ -60,7 +54,7 @@ export class ExtlvideoComponent implements OnInit {
         let a = this.ctm;
         let b = this.vurl;
         this.events.publish('sp_pipmode-down');
-        this.esperarVideo(a, b, this.movx, this.movy);
+        this.esperarVideo(a, b);
         this.sw = false;
       }
     });
@@ -69,46 +63,27 @@ export class ExtlvideoComponent implements OnInit {
   }
 
   ngOnInit() { }
-
-  onDragFactory() {
-    return function (element, x, y) {
-      this.movx = x;
-      this.movy = y;
-    }
-  }
-
-  dragStarted(event: CdkDragStart) {
-    this.state = 'dragStarted';
-  }
-
-  dragEnded(event: CdkDragEnd) {
-    this.state = 'dragEnded'; 
-    if (this.movx <= 20) { 
-      this.events.publish('sp_pipmode-down');
-      const source: any = event.source
-      source._passiveTransform = { x: 50, y: 50 };
-    }
-  }
-
-  dragMoved(event: CdkDragMove) {
-    this.movx = event.pointerPosition.x;
-    this.movy = event.pointerPosition.y;
-  }
-
-  esperarVideo(a, b, x, y): Promise<any> {
+  
+  esperarVideo(a, b): Promise<any> {
     return new Promise<any>(
       (resolve) => {
         setTimeout(resolve, 5)
       }
-    ).then(() => { this.events.publish('sp_pipmode-up2', a, b, x, y); });
+    ).then(() => { this.events.publish('sp_pipmode-up2', a, b); });
   }
 
   toggleFullscreenPip($event) {
     this.vctp = $event;
-  }
+  } 
 
-  onResizeEnd(event: ResizeEvent): void {
-    console.log('Element was resized', event);
-    this.estilo.width = event.rectangle.width.toString() + "px";
+  onMoveEnd($event){
+    if ($event.x <= 0) { 
+      this.events.publish('sp_pipmode-down'); 
+    }
+  } 
+  onResizeStop($event){
+    this.estilo.width = $event.size.width + "px"
+    this.estilo.height = "auto"; 
+    $event.size.height = "auto"; 
   }
 }
