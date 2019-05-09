@@ -1,0 +1,66 @@
+.progress-outter{
+    width: 100%;
+    height: 2px;
+}
+.progress-inner {
+    min-width: 0%;
+    max-width: 100%;
+    height: 2px;
+    white-space: nowrap;
+    overflow:hidden;
+    background-color: #545454;
+    width: 0%;
+}
+
+.divbase{
+    display: flex;
+    width: 100px;
+    height: 300px; 
+    z-index: 5;
+    position: absolute;
+
+}
+
+.divleft{
+    // background-color: red;
+    float: left;
+    left: 0;
+
+}
+
+.divright{
+    // background-color: blue;
+    float: right;
+    
+    right: 0;
+}
+
+.divcenter
+{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 50%;
+	height: 80%;
+    margin: auto;
+    // background-color: green;
+}
+
+ 
+.title{
+    position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 50px;
+    margin: auto;
+    background-color: transparent;
+}
+
+.pantalla{
+    width: 100%;
+    height: 100%;
+}

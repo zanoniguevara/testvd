@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, NavController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -14,11 +14,12 @@ import { VgCoreModule } from 'videogular2/core';
 import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
+import { ModalPage } from './modal/modal.page';
 
 @NgModule({
-  declarations: [AppComponent, ExtlvideoComponent],
-  entryComponents: [],
-  imports: [BrowserModule, 
+  declarations: [AppComponent, ExtlvideoComponent, ModalPage],
+  entryComponents: [ModalPage],
+  imports: [BrowserModule,
     IonicModule.forRoot(), 
     AppRoutingModule, 
     AngularDraggableModule,
